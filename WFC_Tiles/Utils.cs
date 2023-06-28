@@ -31,14 +31,14 @@ public class Utils
     {
         int x = points[id].X;
         int y = points[id].Y;
-        List<int> current = points[id].Possible[0].Points;
+        List<string> current = points[id].Possible[0].Points;
         for (int i = 0; i < points.Count; i++)
         {
             if (points[i].X == x - 1 && points[i].Y == y)
             {
                 for (int j = 0; j < points[i].Possible.Count; j++)
                 {
-                    if (current[3] != points[i].Possible[j].Points[1])
+                    if (current[11] != points[i].Possible[j].Points[3] || current[10] != points[i].Possible[j].Points[4] || current[9] != points[i].Possible[j].Points[5])
                     {
                         points[i].Possible.Remove(points[i].Possible[j]);
                         j--;
@@ -49,7 +49,7 @@ public class Utils
             {
                 for (int j = 0; j < points[i].Possible.Count; j++)
                 {
-                    if (current[1] != points[i].Possible[j].Points[3])
+                    if (current[3] != points[i].Possible[j].Points[11] || current[4] != points[i].Possible[j].Points[10] || current[5] != points[i].Possible[j].Points[9])
                     {
                         points[i].Possible.Remove(points[i].Possible[j]);
                         j--;
@@ -60,7 +60,7 @@ public class Utils
             {
                 for (int j = 0; j < points[i].Possible.Count; j++)
                 {
-                    if (current[0] != points[i].Possible[j].Points[2])
+                    if (current[0] != points[i].Possible[j].Points[8] || current[1] != points[i].Possible[j].Points[7] || current[2] != points[i].Possible[j].Points[6])
                     {
                         points[i].Possible.Remove(points[i].Possible[j]);
                         j--;
@@ -71,7 +71,7 @@ public class Utils
             {
                 for (int j = 0; j < points[i].Possible.Count; j++)
                 {
-                    if (current[2] != points[i].Possible[j].Points[0])
+                    if (current[8] != points[i].Possible[j].Points[0] || current[7] != points[i].Possible[j].Points[1] || current[6] != points[i].Possible[j].Points[2])
                     {
                         points[i].Possible.Remove(points[i].Possible[j]);
                         j--;

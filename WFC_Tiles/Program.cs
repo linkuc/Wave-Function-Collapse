@@ -2,23 +2,28 @@
 using WFC_Tiles;
 using SkiaSharp;
 
-const int n = 64;
-const int m = 64;
+const int n = 32;
+const int m = 32;
+//const string directoryPath = "TilesSimple";
+const string directoryPath = "Tiles";
+//const string directoryPath = "Tiles2";
+//const string directoryPath = "Road";
 
+string[] imagePaths = Directory.GetFiles(directoryPath);
 List<Tile> tiles = new List<Tile>();
-List<List<int>> tilePoints = new List<List<int>>
+foreach(string imagePath in imagePaths)
 {
-    new List<int>{0, 0, 0, 0},
-    new List<int>{1, 1, 0, 1},
-    new List<int>{1, 1, 1, 0},
-    new List<int>{0, 1, 1, 1},
-    new List<int>{1, 0, 1, 1}
-};
-for (int i = 0; i < 5; i++)
-{
-    string imagePath = "C:/Users/linas/Desktop/Programming/WFC/WFC_Tiles/"+i+".png";
     SKBitmap bitmap = SKBitmap.Decode(imagePath);
-    Tile tile = new Tile(tilePoints[i], bitmap);
+    List<string> tilePoints = new List<string>
+    {
+        bitmap.GetPixel((int)Math.Ceiling(bitmap.Width*0.25)-1,0).ToString(),bitmap.GetPixel((int)Math.Ceiling(bitmap.Width*0.5)-1,0).ToString(),
+        bitmap.GetPixel((int)Math.Ceiling(bitmap.Width*0.75)-1,0).ToString(),bitmap.GetPixel(bitmap.Width-1,(int)Math.Ceiling(bitmap.Height*0.25)-1).ToString(),
+        bitmap.GetPixel(bitmap.Width-1,(int)Math.Ceiling(bitmap.Height*0.5)-1).ToString(),bitmap.GetPixel(bitmap.Width-1,(int)Math.Ceiling(bitmap.Height*0.75)-1).ToString(),
+        bitmap.GetPixel((int)Math.Ceiling(bitmap.Width*0.75)-1,bitmap.Height-1).ToString(),bitmap.GetPixel((int)Math.Ceiling(bitmap.Width*0.5)-1,bitmap.Height-1).ToString(),
+        bitmap.GetPixel((int)Math.Ceiling(bitmap.Width*0.25)-1,bitmap.Height-1).ToString(),bitmap.GetPixel(0,(int)Math.Ceiling(bitmap.Height*0.75)-1).ToString(),
+        bitmap.GetPixel(0,(int)Math.Ceiling(bitmap.Height*0.5)-1).ToString(),bitmap.GetPixel(0,(int)Math.Ceiling(bitmap.Height*0.25)-1).ToString()
+    };
+    Tile tile = new Tile(imagePath, tilePoints, bitmap);
     tiles.Add(tile);
 }
 
@@ -46,8 +51,17 @@ while (k < n * m)
     {
         points = Utils.Randomise(points, id);
     }
+    if(points[id].Possible.Count == 0){
+    {
+        Console.WriteLine("unlucky");
+        points = Start();
+    }}
     points = Utils.UpdateNeighbours(points, id);
-    if(points[id].Possible.Count == 0)points = Start();
+    if(points[id].Possible.Count == 0){
+    {
+        Console.WriteLine("unlucky");
+        points = Start();
+    }}
     k++;
 }
 

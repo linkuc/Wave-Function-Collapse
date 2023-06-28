@@ -4,11 +4,13 @@ namespace WFC_Tiles;
 
 public class Tile
 {
-    public List<int> Points;
+    public string Name;
+    public List<string> Points;
     public SKBitmap Bitmap;
 
-    public Tile(List<int> points, SKBitmap bitmap)
+    public Tile(string name, List<string> points, SKBitmap bitmap)
     {
+        Name = name;
         Points = points;
         Bitmap = bitmap;
     }

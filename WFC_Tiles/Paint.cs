@@ -20,7 +20,6 @@ namespace WFC_Tiles
                 {
                     canvas.DrawBitmap(points[i].Possible[0].Bitmap, SKRect.Create(points[i].X*100, points[i].Y*100,100, 100));
                 }
-
             }
 
             using (var stream = new SKFileWStream(imagePath))
